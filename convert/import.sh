@@ -5,4 +5,4 @@ do
 done
 
 # snippet for splitting files:
-# split -a 3 -l 300000 solr-131012.json
+# split -a 3 -b80m file

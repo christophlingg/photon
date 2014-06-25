@@ -64,55 +64,64 @@
 			"postcode":     {"type": "string", "index": "no", "copy_to": "collector_3.default"},
 
 
-            "collector_1" {
-				"de": {
-					"type": "string",
-					"analyzer": "index_ngram",
-					"fields": {"raw": {"type": "string", "analyzer": "index"}}
-				},
-				"default": {
-					"type": "string",
-					"analyzer": "index_ngram",
-					"fields": {"raw": {"type": "string", "analyzer": "index"}}
-				},
-				"en": {
-					"type": "string",
-					"analyzer": "index_ngram",
-					"fields": {"raw": {"type": "string", "analyzer": "index"}}
+            "collector_1": {
+				"type": "object",
+				"properties": {
+					"de": {
+						"type": "string",
+						"analyzer": "index_ngram",
+						"fields": {"raw": {"type": "string", "analyzer": "index"}}
+					},
+					"default": {
+						"type": "string",
+						"analyzer": "index_ngram",
+						"fields": {"raw": {"type": "string", "analyzer": "index"}}
+					},
+					"en": {
+						"type": "string",
+						"analyzer": "index_ngram",
+						"fields": {"raw": {"type": "string", "analyzer": "index"}}
+					}
 				}
             },
-            "collector_2" {
-				"de": {
-					"type": "string",
-					"analyzer": "index_ngram",
-					"fields": {"raw": {"type": "string", "analyzer": "index"}}
-				},
-				"default": {
-					"type": "string",
-					"analyzer": "index_ngram",
-					"fields": {"raw": {"type": "string", "analyzer": "index"}}
-				},
-				"en": {
-					"type": "string",
-					"analyzer": "index_ngram",
-					"fields": {"raw": {"type": "string", "analyzer": "index"}}
+            "collector_2": {
+				"type": "object",
+				"properties": {
+					"de": {
+						"type": "string",
+						"analyzer": "index_ngram",
+						"fields": {"raw": {"type": "string", "analyzer": "index"}}
+					},
+					"default": {
+						"type": "string",
+						"analyzer": "index_ngram",
+						"fields": {"raw": {"type": "string", "analyzer": "index"}}
+					},
+					"en": {
+						"type": "string",
+						"analyzer": "index_ngram",
+						"fields": {"raw": {"type": "string", "analyzer": "index"}}
+					}
 				}
             },
-            "collector_3" {
-				"de": {
-					"type": "string",
-					"analyzer": "index_ngram",
-					"fields": {"raw": {"type": "string", "analyzer": "index"}}
-				},
-				"default": {
-					"type": "string",
-					"analyzer": "index_ngram",
-					"fields": {"raw": {"type": "string", "analyzer": "index"}}
-				},
-				"en": {
-					"type": "string",
-					"analyzer": "index_ngram",
-					"fields": {"raw": {"type": "string", "analyzer": "index"}}
+            "collector_3": {
+				"type": "object",
+				"properties": {
+					"de": {
+						"type": "string",
+						"analyzer": "index_ngram",
+						"fields": {"raw": {"type": "string", "analyzer": "index"}}
+					},
+					"default": {
+						"type": "string",
+						"analyzer": "index_ngram",
+						"fields": {"raw": {"type": "string", "analyzer": "index"}}
+					},
+					"en": {
+						"type": "string",
+						"analyzer": "index_ngram",
+						"fields": {"raw": {"type": "string", "analyzer": "index"}}
+					}
 				}
             }
         }

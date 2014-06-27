@@ -31,5 +31,9 @@
     "filter": {
       "photonngram": {"min_gram": "3", "type": "edgeNGram", "max_gram": "25"}
     }
+  },
+  "index": {
+    "number_of_shards" : 1,
+    "number_of_replicas" : 0
   }
 }

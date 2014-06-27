@@ -15,8 +15,8 @@
             "osm_type": {"type": "string","index": "no"},
             "kmt_id": {"type": "long"},
             "category": {"type": "integer", "index": "no"},
-            "importance": {"type": "float", "index": "no"},
-            "coordinate": {"type": "geo_point", "index": "no"},
+            "importance": {"type": "float"},
+            "coordinate": {"type": "geo_point"},
 
 
             "name": {

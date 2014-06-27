@@ -5,4 +5,4 @@ do
 done
 
 # snippet for splitting files:
-# split -a 3 -b80m file
+# split -a 3 -l 150000 file

@@ -70,19 +70,19 @@
 					"de": {
 						"type": "string",
 						"analyzer": "index_ngram",
-						"norms": {"enabled": false}
+						"norms": {"enabled": false},
 						"fields": {"raw": {"type": "string", "analyzer": "index", "norms": {"enabled": false}}}
 					},
 					"default": {
 						"type": "string",
 						"analyzer": "index_ngram",
-						"norms": {"enabled": false}
+						"norms": {"enabled": false},
 						"fields": {"raw": {"type": "string", "analyzer": "index", "norms": {"enabled": false}}}
 					},
 					"en": {
 						"type": "string",
 						"analyzer": "index_ngram",
-						"norms": {"enabled": false}
+						"norms": {"enabled": false},
 						"fields": {"raw": {"type": "string", "analyzer": "index", "norms": {"enabled": false}}}
 					}
 				}
@@ -93,19 +93,19 @@
 					"de": {
 						"type": "string",
 						"analyzer": "index_ngram",
-						"norms": {"enabled": false}
+						"norms": {"enabled": false},
 						"fields": {"raw": {"type": "string", "analyzer": "index", "norms": {"enabled": false}}}
 					},
 					"default": {
 						"type": "string",
 						"analyzer": "index_ngram",
-						"norms": {"enabled": false}
+						"norms": {"enabled": false},
 						"fields": {"raw": {"type": "string", "analyzer": "index", "norms": {"enabled": false}}}
 					},
 					"en": {
 						"type": "string",
 						"analyzer": "index_ngram",
-						"norms": {"enabled": false}
+						"norms": {"enabled": false},
 						"fields": {"raw": {"type": "string", "analyzer": "index", "norms": {"enabled": false}}}
 					}
 				}
@@ -116,19 +116,19 @@
 					"de": {
 						"type": "string",
 						"analyzer": "index_ngram",
-						"norms": {"enabled": false}
+						"norms": {"enabled": false},
 						"fields": {"raw": {"type": "string", "analyzer": "index", "norms": {"enabled": false}}}
 					},
 					"default": {
 						"type": "string",
 						"analyzer": "index_ngram",
-						"norms": {"enabled": false}
+						"norms": {"enabled": false},
 						"fields": {"raw": {"type": "string", "analyzer": "index", "norms": {"enabled": false}}}
 					},
 					"en": {
 						"type": "string",
 						"analyzer": "index_ngram",
-						"norms": {"enabled": false}
+						"norms": {"enabled": false},
 						"fields": {"raw": {"type": "string", "analyzer": "index", "norms": {"enabled": false}}}
 					}
 				}

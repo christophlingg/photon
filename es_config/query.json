@@ -1,54 +1,22 @@
 {
-    "filtered": {
-        "filter": {
-            "or": {
-                "filters": [
-                    {
-                        "missing": {
-                            "field": "housenumber"
-                        }
-                    },
-                    {
-                        "query": {
-                            "match": {
-                                "housenumber": {
-                                    "query": "${query}",
-                                    "analyzer": "standard"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "exists": {
-                            "field": "name.${lang}.raw"
-                        }
-                    }
-                ]
-            }
-        },
-        "query": {
-            "function_score": {
-                "query": {
-                    "multi_match": {
-                        "fuzziness": 1,
-                        "analyzer": "search",
-                        "prefix_length": 3,
-                        "fields": ["name.${lang}.ngramed^3", "name.${lang}.raw^10", "collector.${lang}.raw", "collector.${lang}"],
-                        "minimum_should_match": "${should_match}",
-                        "query": "${query}",
-                        "type": "best_fields"
-                    }
-                },
-                "score_mode": "multiply",
-                "functions": [
-                    {
-                        "script_score": {
-                            "script": "1 + doc['importance'].value * 40"
-                        }
-                    }
-                ],
-                "boost_mode": "multiply"
-            }
-        }
+  "function_score": {
+    "functions": [
+      {"script_score": {"script": "0.75 + 7. * doc['importance'].value"}}
+    ],
+    "boost_mode": "multiply",
+    "score_mode": "sum",
+    "query": {
+      "multi_match": {
+        "analyzer": "search",
+        "type": "cross_fields",
+        "fields": [
+          "collector_1.default.raw^18", "collector_1.default^2.5", "collector_1.${lang}.raw^18", "collector_1.${lang}^2.5",
+          "collector_2.default.raw^6",  "collector_2.default^1.5", "collector_2.${lang}.raw^6",  "collector_2.${lang}^1.5",
+          "collector_3.default.raw^3",  "collector_3.default",     "collector_3.${lang}.raw^3",  "collector_3.${lang}"
+        ],
+        "minimum_should_match": ${should_match},
+        "query": "${query}"
+      }
     }
+  }
 }

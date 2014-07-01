@@ -2,6 +2,7 @@ package de.komoot.photon.importer;
 
 import com.beust.jcommander.JCommander;
 import com.google.common.base.Joiner;
+import de.komoot.photon.importer.elasticsearch.Converter;
 import de.komoot.photon.importer.elasticsearch.Importer;
 import de.komoot.photon.importer.elasticsearch.Searcher;
 import de.komoot.photon.importer.elasticsearch.Server;
@@ -12,23 +13,20 @@ import lombok.extern.slf4j.Slf4j;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.collect.ImmutableSet;
+import org.elasticsearch.search.SearchHit;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
 import java.io.FileNotFoundException;
-import java.util.List;
 import java.util.Set;
 
-import static spark.Spark.get;
-import static spark.Spark.setPort;
-import static spark.Spark.setIpAddress;
+import static spark.Spark.*;
 
 @Slf4j
 public class App {
-	private static final Set<String> supportedLanguages = ImmutableSet.of("de", "en", "fr", "it");
+	private static final Set<String> supportedLanguages = ImmutableSet.of("de", "en");
 	private static final ObjectMapper mapper = new ObjectMapper();
 
 	public static void main(String[] rawArgs) {
@@ -77,9 +75,9 @@ public class App {
 		de.komoot.photon.importer.Updater updater = new de.komoot.photon.importer.elasticsearch.Updater(esNodeClient);
 		nominatimUpdater.setUpdater(updater);
 
-                setPort(args.getListenPort());
-                setIpAddress(args.getListenIp());
-                
+		setPort(args.getListenPort());
+		setIpAddress(args.getListenIp());
+
 		get(new Route("/nominatim-update") {
 			@Override
 			public Object handle(Request request, Response response) {
@@ -106,7 +104,7 @@ public class App {
 
 				// parse preferred language
 				String lang = request.queryParams("lang");
-				if(lang == null) lang = "en";
+				if(lang == null) lang = "de";
 				if(!supportedLanguages.contains(lang)) {
 					halt(400, "language " + lang + " is not supported, supported languages are: " + Joiner.on(", ").join(supportedLanguages));
 				}
@@ -119,6 +117,14 @@ public class App {
 				} catch(Exception nfe) {
 				}
 
+				// parse srid
+				Integer srid;
+				try {
+					srid = Integer.valueOf(request.queryParams("srid"));
+				} catch(Exception e) {
+					srid = 4326;
+				}
+
 				// parse limit for search results
 				int limit = 15;
 				try {
@@ -126,23 +132,20 @@ public class App {
 				} catch(Exception e) {
 				}
 
-				List<JSONObject> results = searcher.search(query, lang, lon, lat, limit, true);
-				if(results.isEmpty()) {
+				SearchHit[] results = searcher.search(query, lang, lon, lat, limit, true);
+				if(results.length < 1) {
 					// try again, but less restrictive
 					results = searcher.search(query, lang, lon, lat, limit, false);
 				}
 
-				// build geojson
-				final JSONObject collection = new JSONObject();
-				collection.put("type", "FeatureCollection");
-				collection.put("features", new JSONArray(results));
+				response.type("application/json;charset=UTF-8");
 
-				response.type("application/json; charset=utf-8");
+				JSONArray list = new JSONArray(Converter.convert(results, lang, srid));
 
 				if(request.queryParams("debug") != null)
-					return collection.toString(4);
+					return list.toString(4);
 
-				return collection.toString();
+				return list.toString();
 			}
 		});
 	}

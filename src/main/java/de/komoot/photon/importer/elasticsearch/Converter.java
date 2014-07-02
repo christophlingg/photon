@@ -36,7 +36,8 @@ public class Converter {
 				}
 
 				if(source.containsKey("kmt_id")) {
-					result.put("poi_id", toStringId((Long) source.get("kmt_id")));
+					final Integer kmt_id = (Integer) source.get("kmt_id");
+					result.put("poi_id", toStringId(kmt_id.longValue()));
 				}
 
 				result.put("name", buildCaption(source, lang));

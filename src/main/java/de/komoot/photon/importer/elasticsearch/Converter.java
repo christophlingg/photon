@@ -36,7 +36,7 @@ public class Converter {
 				}
 
 				if(source.containsKey("kmt_id")) {
-					result.put("poi_id", source.get("kmt_id"));
+					result.put("poi_id", toStringId((Long) source.get("kmt_id")));
 				}
 
 				result.put("name", buildCaption(source, lang));
@@ -127,5 +127,50 @@ public class Converter {
 		final Map<String, String> map = (Map<String, String>) source.get(fieldName);
 		if(map == null) return null;
 		return Objects.firstNonNull(map.get(lang), map.get("default"));
+	}
+
+	/**
+	 * All possible chars for representing a number as a String. Taken from the
+	 * SUN jdk sources
+	 */
+	private static final char[] DIGITS_62 = {'0', '1', '2', '3', '4', '5',
+			'6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+			'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+			'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+			'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+			'W', 'X', 'Y', 'Z'};
+
+	/**
+	 * Returns a string representation of the first argument in the radix 62 (10
+	 * DIGITS + 2X26 CHARACTERS).
+	 * <p/>
+	 * Example: a long value like 1000 is converted to a string like
+	 * &quot;x2E&quot; (not really)
+	 *
+	 * @param input a <code>long</code>to be converted to a string.
+	 * @return a string representation of the argument in the radix 62.
+	 */
+	private static String toStringId(long input) {
+		char[] buf = new char[65];
+		int charPos = 64;
+		int radix = DIGITS_62.length;
+
+		boolean negative = (input < 0);
+
+		if(!negative) {
+			input = -input;
+		}
+
+		while(input <= -radix) {
+			buf[charPos--] = DIGITS_62[(int) (-(input % radix))];
+			input = input / radix;
+		}
+		buf[charPos] = DIGITS_62[(int) (-input)];
+
+		if(negative) {
+			buf[--charPos] = '-';
+		}
+
+		return new String(buf, charPos, (65 - charPos));
 	}
 }

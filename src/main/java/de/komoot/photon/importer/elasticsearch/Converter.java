@@ -2,7 +2,6 @@ package de.komoot.photon.importer.elasticsearch;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
-import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import de.komoot.photon.importer.Tags;
 import org.elasticsearch.search.SearchHit;
@@ -127,7 +126,12 @@ public class Converter {
 	private static String getLocalised(Map<String, Object> source, String fieldName, String lang) {
 		final Map<String, String> map = (Map<String, String>) source.get(fieldName);
 		if(map == null) return null;
-		return Objects.firstNonNull(map.get(lang), map.get("default"));
+
+		if(map.get(lang) != null) {
+			return map.get(lang);
+		}
+		
+		return map.get("default");
 	}
 
 	/**

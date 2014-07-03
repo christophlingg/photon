@@ -2,7 +2,7 @@
   "function_score": {
     "functions": [
       {"script_score": {"script": "0.75 + 7. * doc['importance'].value"}},
-      {"script_score": {"script": "dist = doc['coordinate'].distanceInKm(${lat}, ${lon}); 4. * exp(- dist / 500)"}}
+      {"script_score": {"script": "dist = doc['coordinate'].distanceInKm(${lat}, ${lon}); 1500. / (500. + dist)"}}
     ],
     "boost_mode": "multiply",
     "score_mode": "sum",

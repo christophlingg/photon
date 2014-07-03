@@ -7,6 +7,7 @@ import org.apache.commons.lang3.text.StrSubstitutor;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.search.SearchHit;
 
 /**
@@ -45,7 +46,7 @@ public class Searcher {
 			query = sub.replace(queryTemplate);
 		}
 
-		SearchResponse response = client.prepareSearch("photon").setSearchType(SearchType.QUERY_AND_FETCH).setQuery(query).setSize(limit).execute().actionGet();
+		SearchResponse response = client.prepareSearch("photon").setSearchType(SearchType.QUERY_AND_FETCH).setQuery(query).setSize(limit).setTimeout(TimeValue.timeValueSeconds(7)).execute().actionGet();
 		return response.getHits().getHits();
 	}
 }

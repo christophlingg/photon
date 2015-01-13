@@ -78,7 +78,7 @@ public class Converter {
 			entry.put("zipcode", source.get("postcode"));
 		}
 
-		for(String key : new String[]{"street", "city", "country"}) {
+		for(String key : new String[]{"street", "city", "country", "state"}) {
 			if(source.containsKey(key))
 				entry.put(key, getLocalised(source, key, lang));
 		}
@@ -130,7 +130,7 @@ public class Converter {
 		if(map.get(lang) != null) {
 			return map.get(lang);
 		}
-		
+
 		return map.get("default");
 	}
 

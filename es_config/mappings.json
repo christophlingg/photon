@@ -2,7 +2,7 @@
     "place": {
         "dynamic": "false",
         "_source" : {
-            "excludes" : ["context.*", "name.int", "name.old", "name.loc", "name.alt"]
+            "excludes" : ["context.*", "name.int", "name.old", "name.loc", "name.alt", "name.reg", "osm_key", "osm_value", "*.it", "*.fr"]
         },
         "_all": {
             "enabled": false
@@ -27,7 +27,8 @@
                     "int":     {"type": "string", "index": "no", "copy_to": "collector_1.default"},
                     "old":     {"type": "string", "index": "no", "copy_to": "collector_1.default"},
                     "loc":     {"type": "string", "index": "no", "copy_to": "collector_1.default"},
-                    "alt":     {"type": "string", "index": "no", "copy_to": "collector_1.default"}
+                    "alt":     {"type": "string", "index": "no", "copy_to": "collector_1.default"},
+                    "reg":     {"type": "string", "index": "no", "copy_to": "collector_1.default"}
                 }
             },
 
@@ -46,7 +47,13 @@
 			},
 			"housenumber":     {"type": "string", "index": "no", "copy_to": "collector_2.default"},
 
-
+            "state": {
+              "properties": {
+                "de":      {"type": "string", "index": "no", "copy_to": "collector_3.de"},
+                "default": {"type": "string", "index": "no", "copy_to": "collector_3.default"},
+                "en":      {"type": "string", "index": "no", "copy_to": "collector_3.en"}
+              }
+            },
 			"country": {
 				"properties": {
 					"de":      {"type": "string", "index": "no", "copy_to": "collector_3.de"},

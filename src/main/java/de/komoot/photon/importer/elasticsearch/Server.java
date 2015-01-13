@@ -80,7 +80,7 @@ public class Server {
 
 		if(!test) {
 			pluginManager = new PluginManager(new Environment(settings), null, PluginManager.OutputMode.VERBOSE, new TimeValue(30000));
-			for(String pluginName : new String[]{"mobz/elasticsearch-head", "polyfractal/elasticsearch-inquisitor", "elasticsearch/marvel/latest"}) {
+			for(String pluginName : new String[]{"mobz/elasticsearch-head", "polyfractal/elasticsearch-inquisitor"}) {
 				try {
 					pluginManager.downloadAndExtract(pluginName);
 				} catch(IOException e) {

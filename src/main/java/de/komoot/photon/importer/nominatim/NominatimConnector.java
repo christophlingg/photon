@@ -59,7 +59,8 @@ public class NominatimConnector {
 					importance,
 					CountryCode.getByCode(rs.getString("calculated_country_code")),
 					(Point) DBUtils.extractGeometry(rs, "centroid"),
-					rs.getLong("linked_place_id")
+					rs.getLong("linked_place_id"),
+					null
 			);
 			doc.setPostcode(rs.getString("postcode"));
 			return doc;

@@ -20,6 +20,7 @@ import spark.Response;
 import spark.Route;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Set;
 
 import static spark.Spark.*;
@@ -132,8 +133,8 @@ public class App {
 				} catch(Exception e) {
 				}
 
-				SearchHit[] results = searcher.search(query, lang, lon, lat, limit, true);
-				if(results.length < 1) {
+				List<SearchHit> results = searcher.search(query, lang, lon, lat, limit, true);
+				if(results.size() < 1) {
 					// try again, but less restrictive
 					results = searcher.search(query, lang, lon, lat, limit, false);
 				}

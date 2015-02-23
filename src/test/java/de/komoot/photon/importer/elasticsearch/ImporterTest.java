@@ -32,6 +32,6 @@ public class ImporterTest extends ESBaseTester {
 		refresh();
 		assertEquals(1L, instance.count());
 
-		assertEquals(1, new Searcher(getClient()).search("testing", "en", null, null, 10, true).length);
+		assertEquals(1, new Searcher(getClient()).search("testing", "en", null, null, 10, true).size());
 	}
 }

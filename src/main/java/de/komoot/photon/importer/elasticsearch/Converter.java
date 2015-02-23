@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +20,8 @@ import java.util.Map;
 public class Converter {
 	private static Joiner spaceJoiner = Joiner.on(" ").skipNulls();
 
-	public static List<JSONObject> convert(SearchHit[] hits, final String lang, final Integer srid) {
-		return Lists.transform(Arrays.asList(hits), new Function<SearchHit, JSONObject>() {
+	public static List<JSONObject> convert(List<SearchHit> hits, final String lang, final Integer srid) {
+		return Lists.transform(hits, new Function<SearchHit, JSONObject>() {
 			@Nullable
 			@Override
 			public JSONObject apply(@Nullable SearchHit hit) {

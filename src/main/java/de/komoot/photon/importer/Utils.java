@@ -30,7 +30,8 @@ public class Utils {
 				.field("osm_type", doc.getOsmType())
 				.field("osm_key", doc.getTagKey())
 				.field("osm_value", doc.getTagValue())
-				.field("importance", doc.getImportance());
+				.field("importance", doc.getImportance())
+				.field("category", doc.getCategory());
 
 		if(doc.getCentroid() != null) {
 			builder.startObject("coordinate")

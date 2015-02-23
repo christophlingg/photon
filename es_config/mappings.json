@@ -12,7 +12,7 @@
         },
         "properties": {
             "osm_id": {"type": "long"},
-            "osm_type": {"type": "string","index": "no"},
+            "osm_type": {"type": "string", "index": "no"},
             "kmt_id": {"type": "long"},
             "category": {"type": "integer", "index": "no"},
             "importance": {"type": "float"},

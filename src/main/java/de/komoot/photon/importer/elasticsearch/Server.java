@@ -60,13 +60,14 @@ public class Server {
 	}
 
 	public Server start(boolean test) {
-		ImmutableSettings.Builder sBuilder = ImmutableSettings.settingsBuilder()
-				.put("path.home", this.esDirectory.toString());
+		ImmutableSettings.Builder sBuilder = ImmutableSettings.settingsBuilder();
+		sBuilder.put("path.home", this.esDirectory.toString());
+		sBuilder.put("network.host", "127.0.0.1");
 
-		// default is 'local', 'none' means no data after node restart!
-
-		if(test)
+		if(test) {
+			// default is 'local', 'none' means no data after node restart!
 			sBuilder.put("gateway.type", "none");
+		}
 
 		Settings settings = sBuilder.build();
 

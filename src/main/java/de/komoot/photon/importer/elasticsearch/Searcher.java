@@ -56,7 +56,7 @@ public class Searcher {
 			query = sub.replace(queryTemplate);
 		}
 
-		SearchResponse response = client.prepareSearch("photon").setSearchType(SearchType.QUERY_AND_FETCH).setQuery(query).setSize(limit * 2).setTimeout(TimeValue.timeValueSeconds(7)).execute().actionGet();
+		SearchResponse response = client.prepareSearch("photon").setSearchType(SearchType.QUERY_AND_FETCH).setQuery(query).setSize(limit * 2).setTimeout(TimeValue.timeValueSeconds(6)).execute().actionGet();
 
 		List<SearchHit> hits = deduplicate(response.getHits().getHits());
 		if(hits.size() > limit) {
@@ -95,8 +95,8 @@ public class Searcher {
 			}
 
 			final List<Coordinate> coordinates = keys.get(name);
-			Map<String, Double> coord = (Map<String, Double>) source.get("coordinate");
-			Coordinate coordinate = new Coordinate(coord.get("lon"), coord.get("lat"));
+			Map<String, Number> coord = (Map<String, Number>) source.get("coordinate");
+			Coordinate coordinate = new Coordinate(coord.get("lon").doubleValue(), coord.get("lat").doubleValue());
 
 			if(coordinates == null) {
 				keys.put(name, coordinate);

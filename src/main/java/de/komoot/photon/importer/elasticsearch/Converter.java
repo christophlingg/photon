@@ -39,7 +39,7 @@ public class Converter {
 				}
 
 				result.put("name", buildCaption(source, lang));
-				result.put("point", buildPoint((Map<String, Double>) source.get("coordinate"), srid));
+				result.put("point", buildPoint((Map<String, Number>) source.get("coordinate"), srid));
 				buildExtent(result, source.get("extent"));
 				result.put("addressEntry", buildAddressEntry(source, lang));
 
@@ -115,10 +115,10 @@ public class Converter {
 		return name != null && name.length() > 0;
 	}
 
-	private static JSONObject buildPoint(Map<String, Double> coordinate, Integer srid) {
+	private static JSONObject buildPoint(Map<String, Number> coordinate, Integer srid) {
 		JSONObject point = new JSONObject();
-		point.put("x", coordinate.get(Tags.KEY_LON));
-		point.put("y", coordinate.get(Tags.KEY_LAT));
+		point.put("x", coordinate.get(Tags.KEY_LON).doubleValue());
+		point.put("y", coordinate.get(Tags.KEY_LAT).doubleValue());
 		return point;
 	}
 

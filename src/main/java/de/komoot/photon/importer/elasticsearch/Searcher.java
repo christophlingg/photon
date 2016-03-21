@@ -56,7 +56,7 @@ public class Searcher {
 			query = sub.replace(queryTemplate);
 		}
 
-		SearchResponse response = client.prepareSearch("photon").setSearchType(SearchType.QUERY_AND_FETCH).setQuery(query).setSize(limit * 2).setTimeout(TimeValue.timeValueSeconds(6)).execute().actionGet();
+		SearchResponse response = client.prepareSearch("photon").setSearchType(SearchType.QUERY_AND_FETCH).setQuery(query).setSize(limit * 2).setTimeout(TimeValue.timeValueSeconds(3)).execute().actionGet();
 
 		List<SearchHit> hits = deduplicate(response.getHits().getHits());
 		if(hits.size() > limit) {

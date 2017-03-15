@@ -134,7 +134,10 @@ public class App {
 				}
 
 				List<SearchHit> results = searcher.search(query, lang, lon, lat, limit, true);
-				if(results.size() < 1) {
+
+				boolean strict = request.queryParams().contains("strict");
+
+				if(results.size() < 1 && !strict) {
 					// try again, but less restrictive
 					results = searcher.search(query, lang, lon, lat, limit, false);
 				}

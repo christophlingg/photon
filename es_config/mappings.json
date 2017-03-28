@@ -35,7 +35,7 @@
 
             "street": {
                 "properties": {
-					"default": {"index": "no"}
+					"default": {"type": "string", "index": "no"}
                 }
             },
 			"city": {
@@ -45,7 +45,7 @@
 					"en":      {"type": "string", "index": "no", "copy_to": "collector_2.en"}
 				}
 			},
-			"housenumber":     {"index": "no"},
+			"housenumber":     {"type": "string", "index": "no"},
 
             "state": {
               "properties": {
